@@ -2,45 +2,50 @@
 
 namespace App\Services;
 
+use App\Repositories\PricingRuleRepository;
+
 class PriceCalculatorService
 {
+    protected PricingRuleRepository $pricingRuleRepo;
+
+    public function __construct(PricingRuleRepository $pricingRuleRepo)
+    {
+        $this->pricingRuleRepo = $pricingRuleRepo;
+    }
+
     public function calculateTotalPrice(float $vehiclePrice, string $vehicleType): float
     {
-        $buyerFeePercentage = 0.10 * $vehiclePrice;
+        $pricingRules = $this->pricingRuleRepo->getPricingRules($vehicleType);
 
-        if ($vehicleType === 'luxury') {
-            $minBuyerFee = 25;
-            $maxBuyerFee = 200;
-        } else {
-            $minBuyerFee = 10;
-            $maxBuyerFee = 50;
-        }
+        $buyerFeePercentage = $pricingRules->buyer_fee_percentage * $vehiclePrice;
+
+        $minBuyerFee = $pricingRules->min_buyer_fee;
+        $maxBuyerFee = $pricingRules->max_buyer_fee;
+        $storageFee = $pricingRules->storage_fee;
+        $sellerFeePercentage = $pricingRules->seller_fee_percentage;
 
         $buyerFee = max($minBuyerFee, min($maxBuyerFee, $buyerFeePercentage));
-        $sellerFee = $this->calculateSellerFee($vehiclePrice, $vehicleType);
-        $associationFee = $this->calculateAssociationFee($vehiclePrice);
-        $storageFee = 100;
+        $sellerFee = $this->calculateSellerFee($vehiclePrice, $sellerFeePercentage);
+        $associationFee = $this->calculateAssociationFee($vehiclePrice, $pricingRules->association_fee);
 
         return $vehiclePrice + $buyerFee + $sellerFee + $associationFee + $storageFee;
     }
 
-    private function calculateSellerFee(float $vehiclePrice, string $vehicleType): float
+    private function calculateSellerFee(string $sellerFeePercentage, float $vehiclePrice, ): float
     {
-        $sellerFeePercentage = ($vehicleType === 'luxury') ? 0.04 : 0.02;
-
         return $sellerFeePercentage * $vehiclePrice;
     }
 
-    private function calculateAssociationFee(float $vehiclePrice): float
+    private function calculateAssociationFee(float $vehiclePrice, array $associationFee): float
     {
         if ($vehiclePrice <= 500) {
-            $fee = 5;
+            $fee = $associationFee['1_to_500'];
         } elseif ($vehiclePrice < 1000) {
-            $fee = 10;
+            $fee = $associationFee['501_to_1000'];
         } elseif ($vehiclePrice < 3000) {
-            $fee = 15;
+            $fee = $associationFee['1001_to_3000'];
         } else {
-            $fee = 20;
+            $fee = $associationFee['over_3000'];
         }
 
         return $fee;

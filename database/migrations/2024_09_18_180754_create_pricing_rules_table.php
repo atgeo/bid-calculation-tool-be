@@ -18,10 +18,7 @@ return new class extends Migration
             $table->decimal('min_buyer_fee'); // Minimum buyer fee amount
             $table->decimal('max_buyer_fee'); // Maximum buyer fee amount
             $table->decimal('seller_fee_percentage'); // e.g., 2.00 for 2%
-            $table->decimal('cost_1_to_500'); // Cost for $1 to $500
-            $table->decimal('cost_501_to_1000'); // Cost for $501 to $1000
-            $table->decimal('cost_1001_to_3000'); // Cost for $1001 to $3000
-            $table->decimal('cost_over_3000'); // Cost for over $3000
+            $table->json('association_fee');
             $table->decimal('storage_fee');
             $table->timestamps();
         });
