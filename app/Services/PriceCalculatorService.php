@@ -13,7 +13,7 @@ class PriceCalculatorService
         $this->pricingRuleRepo = $pricingRuleRepo;
     }
 
-    public function calculateTotalPrice(float $vehiclePrice, string $vehicleType): float
+    public function calculateFeesAndTotalPrice(float $vehiclePrice, string $vehicleType): array
     {
         $pricingRules = $this->pricingRuleRepo->getPricingRules($vehicleType);
 
@@ -28,7 +28,13 @@ class PriceCalculatorService
         $sellerFee = $this->calculateSellerFee($vehiclePrice, $sellerFeePercentage);
         $associationFee = $this->calculateAssociationFee($vehiclePrice, $pricingRules->association_fee);
 
-        return $vehiclePrice + $buyerFee + $sellerFee + $associationFee + $storageFee;
+        return [
+            'buyer_fee' => $buyerFee,
+            'seller_fee' => $sellerFee,
+            'association_fee' => $associationFee,
+            'storage_fee' => $storageFee,
+            'total_price' => $vehiclePrice + $buyerFee + $sellerFee + $associationFee + $storageFee,
+        ];
     }
 
     private function calculateSellerFee(string $sellerFeePercentage, float $vehiclePrice, ): float
