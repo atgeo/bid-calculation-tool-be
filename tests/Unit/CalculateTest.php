@@ -87,7 +87,7 @@ class CalculateTest extends TestCase
         $this->pricingRuleRepoMock->expects($this->once())
             ->method('getPricingRules')
             ->with($vehicleType)
-            ->willReturn($pricingRuleCommon);
+            ->willReturn($pricingRuleLuxury);
 
         $result = $this->priceCalculator->calculateFeesAndTotalPrice($vehiclePrice, $vehicleType);
 
