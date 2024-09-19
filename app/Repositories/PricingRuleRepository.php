@@ -3,12 +3,11 @@
 namespace App\Repositories;
 
 use App\Models\PricingRule;
-use Illuminate\Database\Eloquent\Collection;
 
 class PricingRuleRepository
 {
-    public function getPricingRules(string $type): PricingRule
+    public function getPricingRules(string $vehicleType): PricingRule
     {
-        return PricingRule::where('type', $type)->first();
+        return PricingRule::where('vehicle_type', $vehicleType)->first();
     }
 }

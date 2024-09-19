@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pricing_rules', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
+            $table->enum('vehicle_type', ['common', 'luxury']);
             $table->decimal('buyer_fee_percentage'); // e.g., 10.00 for 10%
             $table->decimal('min_buyer_fee'); // Minimum buyer fee amount
             $table->decimal('max_buyer_fee'); // Maximum buyer fee amount

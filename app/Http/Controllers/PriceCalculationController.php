@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CalculateRequest;
 use App\Services\PriceCalculatorService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class PriceCalculationController extends Controller
 {
@@ -15,7 +15,7 @@ class PriceCalculationController extends Controller
         $this->priceCalculator = $priceCalculator;
     }
 
-    public function calculate(Request $request): JsonResponse
+    public function calculate(CalculateRequest $request): JsonResponse
     {
         $vehiclePrice = $request->input('vehiclePrice');
         $vehicleType = $request->input('vehicleType');
