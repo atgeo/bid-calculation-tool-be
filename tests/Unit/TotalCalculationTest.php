@@ -3,7 +3,6 @@
 namespace Tests\Unit;
 
 use App\Enums\VehicleType;
-use App\Models\PricingRule;
 
 class TotalCalculationTest extends BasePriceCalculatorTest
 {
@@ -92,31 +91,5 @@ class TotalCalculationTest extends BasePriceCalculatorTest
         $this->assertEquals(40000, $result['sellerFee']);
         $this->assertEquals(20, $result['associationFee']);
         $this->assertEquals(100, $result['storageFee']);
-    }
-
-    private function mockPricingRule(
-        string $vehicleType,
-        float  $buyerFeePercentage,
-        float  $minBuyerFee,
-        float  $maxBuyerFee,
-        float  $sellerFeePercentage,
-        array  $associationFee,
-        float  $storageFee
-    ): void
-    {
-        $pricingRule = PricingRule::factory()->state([
-            'vehicle_type' => $vehicleType,
-            'buyer_fee_percentage' => $buyerFeePercentage,
-            'min_buyer_fee' => $minBuyerFee,
-            'max_buyer_fee' => $maxBuyerFee,
-            'seller_fee_percentage' => $sellerFeePercentage,
-            'association_fee' => $associationFee,
-            'storage_fee' => $storageFee
-        ])->make();
-
-        $this->pricingRuleRepoMock->expects($this->once())
-            ->method('getPricingRules')
-            ->with($vehicleType)
-            ->willReturn($pricingRule);
     }
 }
