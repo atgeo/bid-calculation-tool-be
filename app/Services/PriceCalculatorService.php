@@ -44,9 +44,9 @@ class PriceCalculatorService
     {
         if ($vehiclePrice <= 500) {
             $fee = $associationFee['1_to_500'];
-        } elseif ($vehiclePrice < 1000) {
+        } elseif ($vehiclePrice <= 1000) {
             $fee = $associationFee['501_to_1000'];
-        } elseif ($vehiclePrice < 3000) {
+        } elseif ($vehiclePrice <= 3000) {
             $fee = $associationFee['1001_to_3000'];
         } else {
             $fee = $associationFee['over_3000'];
