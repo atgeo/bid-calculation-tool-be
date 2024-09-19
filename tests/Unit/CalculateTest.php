@@ -43,7 +43,7 @@ class CalculateTest extends TestCase
                 '1001_to_3000' => 15,
                 'over_3000' => 20,
             ],
-            100.00
+            100
         );
 
         $result = $this->priceCalculator->calculateFeesAndTotalPrice($vehiclePrice, $vehicleType);
@@ -72,7 +72,7 @@ class CalculateTest extends TestCase
                 '1001_to_3000' => 15,
                 'over_3000' => 20,
             ],
-            100.00
+            100
         );
 
         $result = $this->priceCalculator->calculateFeesAndTotalPrice($vehiclePrice, $vehicleType);
