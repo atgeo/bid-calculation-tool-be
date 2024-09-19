@@ -17,14 +17,12 @@ class PriceCalculatorService
     {
         $pricingRules = $this->pricingRuleRepo->getPricingRules($vehicleType);
 
-        $buyerFeePercentage = $pricingRules->buyer_fee_percentage * $vehiclePrice;
-
         $minBuyerFee = $pricingRules->min_buyer_fee;
         $maxBuyerFee = $pricingRules->max_buyer_fee;
         $storageFee = $pricingRules->storage_fee;
         $sellerFeePercentage = $pricingRules->seller_fee_percentage;
 
-        $buyerFee = max($minBuyerFee, min($maxBuyerFee, $buyerFeePercentage));
+        $buyerFee = max($minBuyerFee, min($maxBuyerFee, $pricingRules->buyer_fee_percentage * $vehiclePrice));
         $sellerFee = $this->calculateSellerFee($vehiclePrice, $sellerFeePercentage);
         $associationFee = $this->calculateAssociationFee($vehiclePrice, $pricingRules->association_fee);
 
