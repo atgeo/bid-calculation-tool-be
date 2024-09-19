@@ -17,8 +17,8 @@ class PriceCalculationController extends Controller
 
     public function calculate(Request $request): JsonResponse
     {
-        $vehiclePrice = $request->input('vehicle_price');
-        $vehicleType = $request->input('vehicle_type');
+        $vehiclePrice = $request->input('vehiclePrice');
+        $vehicleType = $request->input('vehicleType');
 
         $feesAndTotalPrice = $this->priceCalculator->calculateFeesAndTotalPrice($vehiclePrice, $vehicleType);
 
