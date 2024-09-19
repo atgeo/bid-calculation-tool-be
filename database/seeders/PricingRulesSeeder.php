@@ -16,10 +16,10 @@ class PricingRulesSeeder extends Seeder
             'max_buyer_fee' => 50,
             'seller_fee_percentage' => 0.02,
             'association_fee' => [
-                '1_to_500' => 5.00,
-                '501_to_1000' => 10.00,
-                '1001_to_3000' => 15.00,
-                'over_3000' => 20.00,
+                '1_to_500' => 5,
+                '501_to_1000' => 10,
+                '1001_to_3000' => 15,
+                'over_3000' => 20,
             ],
             'storage_fee' => 100,
         ]);
