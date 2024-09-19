@@ -4,28 +4,9 @@ namespace Tests\Unit;
 
 use App\Enums\VehicleType;
 use App\Models\PricingRule;
-use App\Repositories\PricingRuleRepository;
-use App\Services\PriceCalculatorService;
-use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
 
-class CalculateTest extends TestCase
+class TotalCalculationTest extends BasePriceCalculatorTest
 {
-    private PriceCalculatorService $priceCalculator;
-
-    private MockObject $pricingRuleRepoMock;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        // Create a mock for the PricingRuleRepository
-        $this->pricingRuleRepoMock = $this->createMock(PricingRuleRepository::class);
-
-        // Instantiate the PriceCalculatorService with the mocked repository
-        $this->priceCalculator = new PriceCalculatorService($this->pricingRuleRepoMock);
-    }
-
     public function test_calculate_function_common_57(): void
     {
         $vehiclePrice = 57;
