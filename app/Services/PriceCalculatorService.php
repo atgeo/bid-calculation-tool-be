@@ -52,7 +52,7 @@ class PriceCalculatorService
     {
         $sellerFeePercentage = $this->pricingRule->seller_fee_percentage;
 
-        return $sellerFeePercentage * $this->vehiclePrice;
+        return round($sellerFeePercentage * $this->vehiclePrice, 2);
     }
 
     private function calculateAssociationFee(): float
