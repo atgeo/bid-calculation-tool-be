@@ -36,7 +36,7 @@ class CalculateTest extends TestCase
         $vehicleType = VehicleType::COMMON->value;
 
         $pricingRuleCommon = PricingRule::factory()->state([
-            'vehicle_type' => 'common',
+            'vehicle_type' => $vehicleType,
             'buyer_fee_percentage' => 0.10,
             'min_buyer_fee' => 10,
             'max_buyer_fee' => 50,
@@ -69,8 +69,8 @@ class CalculateTest extends TestCase
         $vehiclePrice = 1800;
         $vehicleType = VehicleType::LUXURY->value;
 
-        $pricingRuleCommon = PricingRule::factory()->state([
-            'vehicle_type' => 'luxury',
+        $pricingRuleLuxury = PricingRule::factory()->state([
+            'vehicle_type' => $vehicleType,
             'buyer_fee_percentage' => 0.10,
             'min_buyer_fee' => 25,
             'max_buyer_fee' => 200,
