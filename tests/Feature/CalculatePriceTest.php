@@ -7,13 +7,21 @@ use Tests\TestCase;
 
 class CalculatePriceTest extends TestCase
 {
-    /**
-     * A basic test example.
-     */
-    public function test_the_application_returns_a_successful_response(): void
+    public function test_calculate_price_common_1000000(): void
     {
-        $response = $this->post('/api/calculate-price');
+        $response = $this->post('/api/calculate-price', [
+            'vehiclePrice' => '1000000',
+            'vehicleType' => 'luxury',
+        ]);
 
         $response->assertStatus(200);
+
+        $response->assertJson([
+            'buyerFee' => 200,
+            'sellerFee' => 40000,
+            'associationFee' => 20,
+            'storageFee' => 100,
+            'totalPrice' => 1040320,
+        ]);
     }
 }
