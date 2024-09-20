@@ -13,6 +13,15 @@ DB_PASSWORD=password
 
 After building the Docker image and running the container, you can hit the API at http://localhost:9117.
 
+## Run database migrations and seed
+
+After the container is running, execute the following commands:
+
+```
+php artisan migrate
+php artisan db:seed
+```
+
 ## API Endpoint: api/calculate-price
 The api/calculate-price endpoint is used to calculate fees and the total price based on the vehicle's price and type.
 
