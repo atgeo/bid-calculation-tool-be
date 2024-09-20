@@ -1,6 +1,6 @@
 # bid-calculation-tool-be
 
-## Connecting to the database
+## Connect to the database
 Include the following in the .env file:
 ```
 DB_CONNECTION=mysql
@@ -29,7 +29,7 @@ Request Method: POST
 
 Request Body:
 
-- vehiclePrice (float): The price of the vehicle.
+- vehiclePrice (number): The price of the vehicle.
 - vehicleType (string): The type of vehicle.
 
 Response: The endpoint returns a JSON object containing the calculated fees:
