@@ -15,4 +15,4 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::post('/calculate-price', [PriceCalculationController::class, 'calculate'])->middleware('auth:sanctum');
+Route::post('/calculate-price', [PriceCalculationController::class, 'calculate']);
