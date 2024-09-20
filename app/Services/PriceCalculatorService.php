@@ -45,7 +45,7 @@ class PriceCalculatorService
         $maxBuyerFee = $this->pricingRule->max_buyer_fee;
         $buyerFeeBase = $this->pricingRule->buyer_fee_percentage * $this->vehiclePrice;
 
-        return  max($minBuyerFee, min($maxBuyerFee, $buyerFeeBase));
+        return  round(max($minBuyerFee, min($maxBuyerFee, $buyerFeeBase)), 2);
     }
 
     private function calculateSellerFee(): float

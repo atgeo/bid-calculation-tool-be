@@ -35,6 +35,93 @@ class TotalCalculationTest extends BasePriceCalculatorTest
         $this->assertEquals(100, $result['storageFee']);
     }
 
+    public function test_calculate_function_common_398(): void
+    {
+        $vehiclePrice = 398;
+        $vehicleType = VehicleType::COMMON->value;
+
+        $this->mockPricingRule(
+            $vehicleType,
+            0.10,
+            10,
+            50,
+            0.02,
+            [
+                '1_to_500' => 5,
+                '501_to_1000' => 10,
+                '1001_to_3000' => 15,
+                'over_3000' => 20,
+            ],
+            100
+        );
+
+        $result = $this->priceCalculator->calculateFeesAndTotalPrice($vehiclePrice, $vehicleType);
+
+        $this->assertEquals(550.76, $result['totalPrice']);
+        $this->assertEquals(39.80, $result['buyerFee']);
+        $this->assertEquals(7.96, $result['sellerFee']);
+        $this->assertEquals(5, $result['associationFee']);
+        $this->assertEquals(100, $result['storageFee']);
+    }
+
+    public function test_calculate_function_common_501(): void
+    {
+        $vehiclePrice = 501;
+        $vehicleType = VehicleType::COMMON->value;
+
+        $this->mockPricingRule(
+            $vehicleType,
+            0.10,
+            10,
+            50,
+            0.02,
+            [
+                '1_to_500' => 5,
+                '501_to_1000' => 10,
+                '1001_to_3000' => 15,
+                'over_3000' => 20,
+            ],
+            100
+        );
+
+        $result = $this->priceCalculator->calculateFeesAndTotalPrice($vehiclePrice, $vehicleType);
+
+        $this->assertEquals(671.02, $result['totalPrice']);
+        $this->assertEquals(50, $result['buyerFee']);
+        $this->assertEquals(10.02, $result['sellerFee']);
+        $this->assertEquals(10, $result['associationFee']);
+        $this->assertEquals(100, $result['storageFee']);
+    }
+
+    public function test_calculate_function_common_1100(): void
+    {
+        $vehiclePrice = 1100;
+        $vehicleType = VehicleType::COMMON->value;
+
+        $this->mockPricingRule(
+            $vehicleType,
+            0.10,
+            10,
+            50,
+            0.02,
+            [
+                '1_to_500' => 5,
+                '501_to_1000' => 10,
+                '1001_to_3000' => 15,
+                'over_3000' => 20,
+            ],
+            100
+        );
+
+        $result = $this->priceCalculator->calculateFeesAndTotalPrice($vehiclePrice, $vehicleType);
+
+        $this->assertEquals(1287, $result['totalPrice']);
+        $this->assertEquals(50, $result['buyerFee']);
+        $this->assertEquals(22, $result['sellerFee']);
+        $this->assertEquals(15, $result['associationFee']);
+        $this->assertEquals(100, $result['storageFee']);
+    }
+
     public function test_calculate_function_luxury_1800(): void
     {
         $vehiclePrice = 1800;
